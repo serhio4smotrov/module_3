@@ -1,15 +1,20 @@
+from string import capwords
+
+
 def calculate_structure_sum(*args):
   structure = args
   summa = 0
   for i in structure:
     if isinstance(i, str):
       summa += len(i)
-    elif isinstance(i, float) or isinstance(i, int):
+    elif isinstance(i, (float, int)):
       summa += i
     elif isinstance(i, dict):
-        for j in i:
-          summa += len(j) + i[j]
-    elif isinstance(i, list) or isinstance(i, tuple) or isinstance(i, set):
+      i = list(i.items())
+      summa += calculate_structure_sum(*i)
+    elif isinstance(i, bool):
+      summa += int(i)
+    else:
       summa += calculate_structure_sum(*i)
   return summa
 
