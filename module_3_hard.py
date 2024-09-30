@@ -1,6 +1,3 @@
-from string import capwords
-
-
 def calculate_structure_sum(*args):
   structure = args
   summa = 0
